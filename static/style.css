@@ -1,0 +1,66 @@
+body {
+    margin: 1rem;
+    font-family: arial;
+}
+
+.navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgb(77, 33, 77);
+    color: white;
+}
+
+.navbar-item {
+    display: inline-block;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.navbar-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.navbar-item a:hover {
+    color: rgb(180, 120, 162);
+}
+
+.container {
+    max-width: 800px;
+    margin: 55px auto 0px;
+    padding-top: 1rem;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid rgb(77, 33, 77);
+}
+
+thead th:nth-child(1) {
+    width: 33%;
+  }
+  
+  thead th:nth-child(2) {
+    width: 33%;
+  }
+  
+  thead th:nth-child(3) {
+    width: 33%;
+  }
+
+  th, td {
+      padding: .25rem .5rem;
+      border: 1px solid rgb(77, 33, 77);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgb(216, 192, 216);
+  }

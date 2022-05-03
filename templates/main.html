@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northwind Suppliers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-item">
+            <a href="{{ url_for('main') }}">
+                Northwind Suppliers
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Northwind Supplier Locations</h1>
+
+        <table>
+            <tr>
+                <th>Company Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+
+            {% for company_data in company_locations %}
+            <tr>
+                <td>{{ company_data['CompanyName'] }}</td>
+                <td>{{ company_data['City'] }}</td>
+                <td>{{ company_data['Country'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+
+</html>
