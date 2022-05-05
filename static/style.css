@@ -64,3 +64,9 @@ thead th:nth-child(1) {
   tbody tr:nth-child(even) {
     background-color: rgb(216, 192, 216);
   }
+
+  tr td a {
+      font-weight: bold;
+      color:rgb(82, 68, 211);
+      text-decoration: none;
+  }

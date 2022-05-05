@@ -19,25 +19,10 @@
         </div>
     </nav>
 
-    <div class="container">
-        <h1>Northwind Supplier Locations</h1>
+    {% block container %}
 
-        <table>
-            <tr>
-                <th>Company Name</th>
-                <th>City</th>
-                <th>Country</th>
-            </tr>
-
-            {% for company_data in company_locations %}
-            <tr>
-                <td>{{ company_data['CompanyName'] }}</td>
-                <td>{{ company_data['City'] }}</td>
-                <td>{{ company_data['Country'] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+    
+    {% endblock %}
 
 </body>
 

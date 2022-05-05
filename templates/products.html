@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="container">
+    <h1>{{ supplier[0]['CompanyName'] }}'s Products</h1>
+
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity Per Unit</th>
+            <th>Unit Price</th>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product['ProductName'] }}</td>
+            <td>{{ product['QuantityPerUnit'] }}</td>
+            <td>{{ product['UnitPrice'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

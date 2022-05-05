@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="container">
+    <h1>Northwind Supplier Locations</h1>
+
+    <table>
+        <tr>
+            <th>Company Name</th>
+            <th>City</th>
+            <th>Country</th>
+        </tr>
+
+        {% for company_data in company_locations %}
+        <tr>
+            <td><a href="{{ url_for('products', supplier_id=company_data['Id']) }}">{{ company_data['CompanyName'] }}</a></td>
+            <td>{{ company_data['City'] }}</td>
+            <td>{{ company_data['Country'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

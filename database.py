@@ -1,10 +1,14 @@
 from sqlite3 import connect
 
 
-def query(query_text):
+# adding parameter as an argument here
+# the * makes it so that any number of parameters can be accepted
+# this syntax is needed when adding an argument to get_supplier_products()
+def query(query_text, *param):
     conn = connect('Northwind_large.sqlite')
     cur = conn.cursor()
-    cur.execute(query_text)
+    # added param
+    cur.execute(query_text, param)
 
     column_names = []
 
@@ -30,6 +34,35 @@ def get_name_city_country():
     Select CompanyName
     , City
     , Country 
+    , Id
     FROM Supplier
     ORDER BY CompanyName ASC
     """)
+
+# Using Python logic to control what SQL is being run, 
+# but this makes it possible for hackers to inject malicious SQL code
+# def get_supplier_products(supplier_id):
+    # return query(f"""
+    #     SELECT * 
+    #     FROM Product
+    #     WHERE SupplierId = {supplier_id}
+    # """)
+
+# SQLite Python wrapper knows that the '?' is something we want to plugin a value here
+def get_supplier_products(supplier_id):
+    return query("""
+        SELECT * 
+        FROM Product
+        WHERE SupplierId = ? 
+    """
+    , supplier_id)
+
+
+# to keep track of the supplier's name when redirecting to a new page
+def get_supplier(supplier_id):
+    return query("""
+        SELECT CompanyName 
+        FROM Supplier
+        WHERE Id = ? 
+    """
+    , supplier_id)
