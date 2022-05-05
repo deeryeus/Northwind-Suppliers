@@ -1,13 +1,10 @@
 from sqlite3 import connect
 
 
-# adding parameter as an argument here
-# the * makes it so that any number of parameters can be accepted
-# this syntax is needed when adding an argument to get_supplier_products()
 def query(query_text, *param):
     conn = connect('Northwind_large.sqlite')
     cur = conn.cursor()
-    # added param
+
     cur.execute(query_text, param)
 
     column_names = []
@@ -27,42 +24,53 @@ def query(query_text, *param):
     return dicts
 
 
-# list of dictionaries for each row ...
-# each dict contains { column name : data }
-def get_name_city_country():
+# added product count to display the number of products
+# offered by suppliers 
+def get_supplier_info():
     return query("""
-    Select CompanyName
-    , City
-    , Country 
-    , Id
-    FROM Supplier
+    SELECT s.Id
+    , s.CompanyName
+    , COUNT(p.Id) AS 'ProductCount'
+    , s.City
+    , s.Country
+    FROM Product p
+    INNER JOIN Supplier s
+        ON p.SupplierId = s.Id
+    GROUP BY s.CompanyName
     ORDER BY CompanyName ASC
     """)
 
-# Using Python logic to control what SQL is being run, 
-# but this makes it possible for hackers to inject malicious SQL code
-# def get_supplier_products(supplier_id):
-    # return query(f"""
-    #     SELECT * 
-    #     FROM Product
-    #     WHERE SupplierId = {supplier_id}
-    # """)
 
-# SQLite Python wrapper knows that the '?' is something we want to plugin a value here
 def get_supplier_products(supplier_id):
     return query("""
-        SELECT * 
-        FROM Product
-        WHERE SupplierId = ? 
+        SELECT p.ProductName
+        , p.SupplierId 
+        , s.CompanyName
+        , p.QuantityPerUnit
+        , p.UnitPrice
+        , p.CategoryId
+        , c.CategoryName
+        FROM Product p
+        INNER JOIN Supplier s
+            ON p.SupplierId = s.Id
+        INNER JOIN Category c
+            ON p.CategoryId = c.Id
+        WHERE p.SupplierId = ?
     """
     , supplier_id)
 
 
-# to keep track of the supplier's name when redirecting to a new page
-def get_supplier(supplier_id):
+# added to view categories such as beverages, condiments, etc.
+# along with the number of products within that category
+def get_categories():
     return query("""
-        SELECT CompanyName 
-        FROM Supplier
-        WHERE Id = ? 
-    """
-    , supplier_id)
+        SELECT c.Id
+        , c.CategoryName
+        , c.Description
+        , COUNT(p.CategoryId) AS 'CategoryCount'
+        FROM Category c
+        INNER JOIN Product p
+            ON c.Id = p.CategoryId
+        GROUP BY c.CategoryName
+        ORDER BY c.CategoryName ASC
+    """)

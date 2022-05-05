@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="container">
+    <h1>Product Categories</h1>
+
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Product Count</th>
+        </tr>
+
+        {% for category in categories %}
+        <tr>
+            <td>{{ category['CategoryName'] }}</td>
+            <td>{{ category['Description'] }}</td>
+            <td>{{ category['CategoryCount'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
