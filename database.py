@@ -15,7 +15,7 @@ def query(query_text, *param):
 
     dicts = []
 
-    for row in rows: 
+    for row in rows:
         d = dict(zip(column_names, row))
         dicts.append(d)
 
@@ -25,7 +25,7 @@ def query(query_text, *param):
 
 
 # added product count to display the number of products
-# offered by suppliers 
+# offered by suppliers
 def get_supplier_info():
     return query("""
     SELECT s.Id
@@ -44,7 +44,7 @@ def get_supplier_info():
 def get_supplier_products(supplier_id):
     return query("""
         SELECT p.ProductName
-        , p.SupplierId 
+        , p.SupplierId
         , s.CompanyName
         , p.QuantityPerUnit
         , p.UnitPrice
@@ -56,8 +56,7 @@ def get_supplier_products(supplier_id):
         INNER JOIN Category c
             ON p.CategoryId = c.Id
         WHERE p.SupplierId = ?
-    """
-    , supplier_id)
+    """, supplier_id)
 
 
 # added to view categories such as beverages, condiments, etc.
@@ -74,3 +73,21 @@ def get_categories():
         GROUP BY c.CategoryName
         ORDER BY c.CategoryName ASC
     """)
+
+def get_category_info(category_id):
+    return query("""
+        SELECT c.Id
+        , c.CategoryName
+        , p.ProductName
+        , p.SupplierId 
+        , s.CompanyName
+        , p.CategoryId
+        FROM Product p
+        INNER JOIN Supplier s
+            ON p.SupplierId = s.Id
+        INNER JOIN Category c
+            ON p.CategoryId = c.Id
+        WHERE c.Id = ?
+        ORDER BY s.CompanyName ASC
+    """
+    , category_id)

@@ -8,6 +8,7 @@
     <table>
         <tr>
             <th>Product Name</th>
+            <th>Category</th>
             <th>Quantity Per Unit</th>
             <th>Unit Price</th>
         </tr>
@@ -15,6 +16,7 @@
         {% for product in products %}
         <tr>
             <td>{{ product['ProductName'] }}</td>
+            <td><a href="{{ url_for('category_info', category_id=product['CategoryId']) }}">{{ product['CategoryName'] }}</a></td>
             <td>{{ product['QuantityPerUnit'] }}</td>
             <td>{{ product['UnitPrice'] }}</td>
         </tr>

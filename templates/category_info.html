@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="container">
+    <h1>{{ category_info[0]['CategoryName'] }}</h1>
+
+    <table>
+        <tr>
+            <th>Company Name</th>
+            <th>Product Name</th>
+        </tr>
+
+        {% for category in category_info %}
+        <tr>
+            <td><a href="{{ url_for('products', supplier_id=category['SupplierId']) }}">{{ category['CompanyName'] }}</a></td>
+            <td>{{ category['ProductName'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

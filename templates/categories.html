@@ -14,7 +14,7 @@
 
         {% for category in categories %}
         <tr>
-            <td>{{ category['CategoryName'] }}</td>
+            <td><a href="{{ url_for('category_info', category_id=category['Id']) }}">{{ category['CategoryName'] }}</a></td>
             <td>{{ category['Description'] }}</td>
             <td>{{ category['CategoryCount'] }}</td>
         </tr>

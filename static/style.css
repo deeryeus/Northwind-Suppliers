@@ -6,7 +6,8 @@ body {
 .navbar {
     position: fixed;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -14,26 +15,35 @@ body {
     color: white;
 }
 
-.navbar-item {
+.navbar-links {
+    list-style: none;
+}
+
+.navbar-item, .navbar-links li {
     display: inline-block;
     font-weight: bold;
     padding: 1rem;
 }
 
-.navbar-item a {
+.navbar-item a, .navbar-links li a {
     color: white;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
+    transition: all 0.3s ease 0s;
 }
 
-.navbar-item a:hover {
-    color: rgb(180, 120, 162);
+.navbar-item a:hover, .navbar-links li a:hover {
+    color: rgb(218, 160, 200);
+}
+
+.navbar-item a:active, .navbar-links li a:active {
+    color: rgb(199, 123, 175);
 }
 
 .container {
     max-width: 800px;
-    margin: 55px auto 0px;
+    margin: 87px auto 0px;
     padding-top: 1rem;
 }
 
@@ -67,6 +77,26 @@ thead th:nth-child(1) {
 
   tr td a {
       font-weight: bold;
-      color:rgb(82, 68, 211);
+      color:rgb(89, 76, 202);
       text-decoration: none;
   }
+
+/* when previously clicked */
+  tr td a:visted {
+    font-weight: bold;
+    color:rgb(89, 76, 202);
+    text-decoration: none;
+}
+
+tr td a:hover {
+    font-weight: bold;
+    color:rgb(110, 97, 221);
+    text-decoration: none;
+}
+
+/* when clicked */
+tr td a:active {
+    font-weight: bold;
+    color:rgb(65, 54, 167);
+    text-decoration: none;
+}

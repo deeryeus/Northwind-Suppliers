@@ -10,18 +10,24 @@
 </head>
 
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-item">
+                <a href="{{ url_for('main') }}">
+                    Northwind Suppliers
+                </a>
+            </div>
 
-    <nav class="navbar">
-        <div class="navbar-item">
-            <a href="{{ url_for('main') }}">
-                Northwind Suppliers
-            </a>
-        </div>
-    </nav>
+            <ul class="navbar-links">
+                <li><a href="{{ url_for('main') }}">Suppliers</a></li>
+                <li><a href="{{ url_for('categories') }}">Categories</a></li>
+            </ul>
+        </nav>
+    </header>
 
     {% block container %}
 
-    
+
     {% endblock %}
 
 </body>
